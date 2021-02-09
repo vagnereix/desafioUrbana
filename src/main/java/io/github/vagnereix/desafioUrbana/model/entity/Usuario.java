@@ -34,7 +34,7 @@ public class Usuario {
     @NotEmpty(message = "{campo.senha.usuario.obrigatorio}")
     private String senha;
 
-    @OneToMany //Um usuario pode ter vários cartões
+    @OneToMany(cascade = CascadeType.ALL) //Um usuario pode ter vários cartões
     @JoinColumn(name = "id_cartao")
     @JsonIgnoreProperties
     @JsonManagedReference
