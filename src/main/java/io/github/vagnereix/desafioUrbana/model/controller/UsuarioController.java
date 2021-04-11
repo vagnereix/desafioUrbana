@@ -57,4 +57,9 @@ public class UsuarioController {
         this.usuarioService.atualizarUsuario(id, usuario);
     }
 
+    @RequestMapping(value = "/usuario/email/{email}", method = RequestMethod.GET)
+    public Usuario buscarPorEmail(@PathVariable String email){
+        return usuarioService.buscarUsuarioEmail(email);
+    }
+
 }

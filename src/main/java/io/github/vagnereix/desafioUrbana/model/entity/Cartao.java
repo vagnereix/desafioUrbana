@@ -2,6 +2,7 @@ package io.github.vagnereix.desafioUrbana.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.github.vagnereix.desafioUrbana.model.entity.enums.TipoCartao;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -35,9 +36,10 @@ public class Cartao {
     private String nome;
 
     @Column
-    private boolean status = false;
+    private boolean status = true;
 
     @Column
-    @NotEmpty(message = "{campo.tipo.cartao.obrigatorio}")
-    private String tipo;
+    @Enumerated(EnumType.STRING)
+    @NotNull(message = "{campo.tipo.cartao.obrigatorio}")
+    private TipoCartao tipo;
 }

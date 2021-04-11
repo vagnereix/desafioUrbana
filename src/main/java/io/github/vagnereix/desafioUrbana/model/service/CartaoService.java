@@ -2,6 +2,7 @@ package io.github.vagnereix.desafioUrbana.model.service;
 
 import io.github.vagnereix.desafioUrbana.model.entity.Cartao;
 import io.github.vagnereix.desafioUrbana.model.entity.Usuario;
+import io.github.vagnereix.desafioUrbana.model.entity.enums.TipoCartao;
 import io.github.vagnereix.desafioUrbana.model.repository.CartaoRepository;
 import io.github.vagnereix.desafioUrbana.model.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
@@ -48,5 +49,9 @@ public class CartaoService {
 
     public List<Cartao> buscar() {
         return cartaoRepository.findAll();
+    }
+
+    public TipoCartao[] getTipos() {
+        return TipoCartao.values();
     }
 }

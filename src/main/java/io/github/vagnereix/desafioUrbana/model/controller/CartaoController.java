@@ -1,6 +1,7 @@
 package io.github.vagnereix.desafioUrbana.model.controller;
 
 import io.github.vagnereix.desafioUrbana.model.entity.Cartao;
+import io.github.vagnereix.desafioUrbana.model.entity.enums.TipoCartao;
 import io.github.vagnereix.desafioUrbana.model.service.CartaoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,11 @@ import java.util.List;
 public class CartaoController {
 
     private final CartaoService cartaoService;
+
+    @RequestMapping(value = "/tipos", method = RequestMethod.GET)
+    public TipoCartao[] tiposCartao(){
+        return cartaoService.getTipos();
+    }
 
     //lista todos os cartões de um usuário
     @GetMapping("{id}")

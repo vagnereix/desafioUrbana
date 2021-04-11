@@ -1,5 +1,6 @@
 package io.github.vagnereix.desafioUrbana.model.service;
 
+import io.github.vagnereix.desafioUrbana.model.controller.exception.CartaoCadastradoException;
 import io.github.vagnereix.desafioUrbana.model.controller.exception.UsuarioCadastradoException;
 import io.github.vagnereix.desafioUrbana.model.entity.Cartao;
 import io.github.vagnereix.desafioUrbana.model.repository.CartaoRepository;
@@ -25,6 +26,11 @@ public class UsuarioService implements UserDetailsService {
     private final CartaoRepository cartaoRepository;
 
     public Usuario salvarCartao(int id, Cartao cartao){
+        boolean exists = cartaoRepository.existsByNumero(cartao.getNumero());
+        if(exists){
+            throw new CartaoCadastradoException(cartao.getNumero());
+        }
+
         Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado!"));
         cartao.setUsuario(usuario);
@@ -76,6 +82,11 @@ public class UsuarioService implements UserDetailsService {
 
     public Usuario buscarUsuarioUnico(int id) {
         return usuarioRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado!"));
+    }
+
+    public Usuario buscarUsuarioEmail(String email) {
+        return usuarioRepository.findByEmail(email)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado!"));
     }
 }
